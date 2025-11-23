@@ -1,0 +1,77 @@
+﻿@{
+    var title = ViewData["Title"] as string ?? "The Hotel Kyiv";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@title - The Hotel Kyiv</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="hk-body">
+    <!-- Глобальний 3D-фон зі Spline: видно на всіх секціях -->
+    <div class="hk-global-bg">
+        <iframe src="https://my.spline.design/3dstars-VfxLzACyvmYMJmJ7NnNwbmoC/"
+                class="hk-global-spline"
+                frameborder="0"
+                loading="lazy">
+        </iframe>
+    </div>
+    <div class="hk-global-overlay"></div>
+
+    <header class="hk-main-header">
+        <div class="hk-header-inner">
+            <div class="hk-logo">
+                <span class="hk-logo-main">The Hotel Kyiv</span>
+                <span class="hk-logo-sub">Luxury • Kyiv • Ukraine</span>
+            </div>
+
+            <nav class="hk-nav">
+                <a href="#hero">Overview</a>
+                <a href="#rooms">Hotel story</a>
+                <a href="#experiences">Experiences</a>
+                <a href="#desktop-app">Desktop app</a>
+                <a href="#payment-demo">Payments</a>
+            </nav>
+
+            <div class="hk-nav-actions">
+                <!-- Кнопка Book Now просто скролить до секції з десктоп-додатком -->
+                <a href="#desktop-app" class="hk-book-btn">Book now</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="hk-main">
+        @RenderBody()
+    </main>
+
+    <!-- Кнопка "вгору" – з’являється коли користувач прокрутив сторінку вниз -->
+    <a href="#hero" class="hk-scroll-top" id="hkScrollTop" aria-label="Back to top">
+        ↑
+    </a>
+
+    <footer class="hk-footer">
+        <div class="hk-footer-inner">
+            <span>© @DateTime.Now.Year The Hotel Kyiv. All rights reserved.</span>
+            <span>CEO of this hotel – Andrew Berezovskyi.</span>
+        </div>
+    </footer>
+
+    <script>
+        // показ/приховування кнопки "вгору"
+        window.addEventListener('scroll', function () {
+            var btn = document.getElementById('hkScrollTop');
+            if (!btn) return;
+            if (window.scrollY > 400) {
+                btn.classList.add('visible');
+            } else {
+                btn.classList.remove('visible');
+            }
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
